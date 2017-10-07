@@ -28,11 +28,11 @@ public class SuggestionDBHandler extends SQLiteOpenHelper {
     private static final String SUG_PREFERENCE  = "preference";
 
 
-    private static final String CREATE_SUG_TABLE = "CREATE TABLE" + TABLE_SUG + "("
-            + SUG_ID + "INTEGER PRIMARY AUTOINCREMENT,"
-            + SUG_NAME + "TEXT,"
-            + SUG_NUM_VISITED + "INTEGER,"
-            + SUG_PREFERENCE + "REAL)";
+    private static final String CREATE_SUG_TABLE = "CREATE TABLE " + TABLE_SUG + "("
+            + SUG_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
+            + SUG_NAME + " TEXT, "
+            + SUG_NUM_VISITED + " INTEGER, "
+            + SUG_PREFERENCE + " REAL)";
 
     public SuggestionDBHandler(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);

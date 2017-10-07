@@ -13,6 +13,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.TextView;
 
 import com.example.jazz.foocider.Objects.Suggestion;
 import com.example.jazz.foocider.R;
@@ -25,6 +26,9 @@ import java.util.Random;
 public class NavigationDrawer extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
+    private Suggestion suggestion;
+    private TextView suggestedTitle;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,11 +36,16 @@ public class NavigationDrawer extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        suggestedTitle = (TextView) findViewById(R.id.suggestion_title);
+
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                getSuggestion();
+                suggestion = getSuggestion();
+                if (suggestion != null) {
+                    suggestedTitle.setText(suggestion.getName());
+                }
             }
         });
 
@@ -58,6 +67,10 @@ public class NavigationDrawer extends AppCompatActivity
         } else {
             super.onBackPressed();
         }
+    }
+
+    public void openFilter(View view){
+        ;
     }
 
     @Override
@@ -100,7 +113,7 @@ public class NavigationDrawer extends AppCompatActivity
 
     public Suggestion getSuggestion() {
 
-        List<Suggestion> suggestionList = new ArrayList<>();
+        List<Suggestion> suggestionList;
 
         SuggestionDBHandler dbHandler = new SuggestionDBHandler(getApplicationContext());
         suggestionList = dbHandler.getAllSuggestions();
